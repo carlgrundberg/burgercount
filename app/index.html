@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Count your burgers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+
+<script type="text/x-handlebars">
+    <div class="container">
+        <header>
+            <h1>Burger count!</h1>
+        </header>
+        <div class="content">
+            {{outlet}}
+        </div>
+    </div>
+</script>
+
+<script type="text/x-handlebars" id="index">
+    <ul>
+        {{#each}}
+        <li>{{name}}
+            <ul>
+                {{#each products}}
+                <li>{{name}}</li>
+                {{/each}}
+            </ul>
+        </li>
+        {{/each}}
+    </ul>
+</script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="http://builds.emberjs.com/canary/ember.js"></script>
+<script src="http://builds.emberjs.com/canary/ember-data.js"></script>
+<script src="./main.js"></script>
+</body>
+</html>

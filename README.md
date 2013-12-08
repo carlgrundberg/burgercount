@@ -1,0 +1,1 @@
+Creating a client side app with REST/JSON backend with minimum code.
