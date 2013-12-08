@@ -4,10 +4,7 @@ var express = fortune.express;
 var app = fortune({
 		db: 'burgercount'
 	})
-	.resource('category', {
-		name: String,
-		products: ['product']
-	})
+	.resource('category', require('./app/models/category'))
 	.resource('product', {
 		name: String,
 		calories: Number,
