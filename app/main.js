@@ -21,13 +21,6 @@ for(var i in models) {
 	App[i] = DS.Model.extend(toDSAttr(models[i]));
 }
 
-
-App.Product = DS.Model.extend({
-	name: DS.attr('string'),
-	calories: DS.attr('number'),
-	category: DS.belongsTo('category')
-});
-
 App.IndexRoute = Ember.Route.extend({
 	model: function () {
 		return this.store.find('category');
