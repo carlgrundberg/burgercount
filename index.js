@@ -2,15 +2,15 @@ var fortune = require('fortune');
 var express = fortune.express;
 
 var app = fortune({
-		db: 'burgercount'
-	})
-	.resource('category', require('./app/models/category'))
-	.resource('product', {
-		name: String,
-		calories: Number,
-		category: 'category'
-	})
-	.use(express.static('app'))
-	.use(express.compress())
-	.use(express.errorHandler())
-	.listen(80);
+	db: 'burgercount'
+});
+
+var models = require('./app/models');
+for(var i in models) {
+	app.resource(i.toLowerCase(), models[i]);
+}
+
+app.use(express.static('app'));
+app.use(express.compress());
+app.use(express.errorHandler());
+app.listen(80);

@@ -2,14 +2,25 @@ App = Ember.Application.create();
 
 function toDSAttr(model) {
 	var dsModel = {};
-	for(i in model) {
-		dsModel[i] = DS.attr('string');
+	for (var i in model) {
+		if(model[i] instanceof Array) {
+			dsModel[i] = DS.hasMany(model[i]);
+		} else if(typeof model[i] == 'string') {
+			dsModel[i] = DS.belongsTo(model[i]);
+		} else if(model[i] == Number) {
+			dsModel[i] = DS.attr('number');
+		} else if(model[i] == String) {
+			dsModel[i] = DS.attr('string');
+		}
 	}
 	return dsModel;
 }
 
 //Models
-App.Category = DS.Model.extend(toDSAttr(models['category']));
+for(var i in models) {
+	App[i] = DS.Model.extend(toDSAttr(models[i]));
+}
+
 
 App.Product = DS.Model.extend({
 	name: DS.attr('string'),
