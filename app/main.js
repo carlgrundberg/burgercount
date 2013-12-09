@@ -1,7 +1,15 @@
 App = Ember.Application.create();
 
+function toDSAttr(model) {
+	var dsModel = {};
+	for(i in model) {
+		dsModel[i] = DS.attr('string');
+	}
+	return dsModel;
+}
+
 //Models
-App.Category = DS.Model.extend(Category);
+App.Category = DS.Model.extend(toDSAttr(models['category']));
 
 App.Product = DS.Model.extend({
 	name: DS.attr('string'),

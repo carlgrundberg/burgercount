@@ -1,11 +1,10 @@
+var model = {
+	name: String,
+	products: ['product']
+};
+
 if (typeof module !== 'undefined' && module.exports) {
-	exports = module.exports = {
-		name: String,
-		products: ['product']
-	};
+	module.exports = model;
 } else {
-	var Category = {
-		name: DS.attr('string'),
-		products: DS.hasMany('product')
-	};
+	window.models = { category: model };
 }
