@@ -1,5 +1,10 @@
 App = Ember.Application.create();
 
+App.ApplicationAdapter = DS.RESTAdapter.extend({
+	namespace: 'api',
+	bulkCommit: true
+});
+
 function toDSAttr(model) {
 	var dsModel = {};
 	for (var i in model) {
@@ -21,8 +26,28 @@ for(var i in models) {
 	App[i] = DS.Model.extend(toDSAttr(models[i]));
 }
 
-App.IndexRoute = Ember.Route.extend({
-	model: function () {
+App.Router.map(function() {
+	this.resource('categories', function() {
+		this.resource('category', { path: ':category_id' });
+	});
+});
+
+App.CategoriesRoute = Ember.Route.extend({
+	model: function() {
 		return this.store.find('category');
+	}
+});
+
+App.CategoryRoute = Ember.Route.extend({
+	model: function(params) {
+		return this.store.find('category', params.category_id);
+	}
+});
+
+App.CategoryController = Ember.ObjectController.extend({
+	actions: {
+		save: function() {
+			this.get('model').save();
+		}
 	}
 });
