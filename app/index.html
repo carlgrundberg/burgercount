@@ -39,8 +39,9 @@
     <div class="row">
         <div class="col-sm-3 well">
             <ul class="nav nav-pills nav-stacked">
+                <li>{{#link-to 'categories.new'}}<span class="glyphicon glyphicon-plus"></span> New{{/link-to}}</li>
                 {{#each}}
-                <li>{{#link-to 'category' this}}{{name}}{{/link-to}}</li>
+                <li>{{#link-to 'categories.view' this}}{{name}}{{/link-to}}</li>
                 {{/each}}
             </ul>
         </div>
@@ -50,9 +51,20 @@
     </div>
 </script>
 
-<script type="text/x-handlebars" id="category">
-    <p>{{input type="text" value=name}}</p>
-    <button {{action 'save'}}>Save</button>
+<script type="text/x-handlebars" id="categories/view">
+    {{partial 'categories/edit'}}
+</script>
+
+<script type="text/x-handlebars" id="categories/new">
+    {{partial 'categories/edit'}}
+</script>
+
+<script type="text/x-handlebars" id="categories/_edit">
+    <div class="form-group">
+        <label for="categoryName">Name</label>
+        {{input type="text" value=name class="form-control" id="categoryName" placeholder="Enter name"}}
+    </div>
+    <button class="btn btn-success" {{action 'save'}}>Save</button>
 </script>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
